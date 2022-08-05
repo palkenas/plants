@@ -4,22 +4,22 @@ include './Models/Db.php';
 class Plant
 {
     public $id;
-    public $nameLt;
-    public $nameLat;
-    public $isPerennial;
+    public $namelt;
+    public $namelat;
+    public $isperennial;
     public $age;
     public $height;
 
-    public function __construct($id, $nameLt, $nameLat, $isPerennial, $age, $height)
+    public function __construct($id, $namelt, $namelat, $isperennial, $age, $height)
     {
         $this->id = $id;
-        $this->name = $nameLt;
-        $this->nomen = $nameLat;
-        $this->perennial = $isPerennial;
+        $this->namelt = $namelt;
+        $this->namelat = $namelat;
+        $this->isperennial = $isperennial;
         $this->age = $age;
         $this->height = $height;
     }
-    
+
     public static function find($id)
     {
         $db = new Db();
@@ -27,9 +27,9 @@ class Plant
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
-     
+
         while ($row = $result->fetch_assoc()) {
-            $plant = new Plant($row['id'], $row['name'], $row['nomen'], $row['perennial'], $row['age'], $row['height']);
+            $plant = new Plant($row['id'], $row['namelt'], $row['namelat'], $row['isperennial'], $row['age'], $row['height']);
         }
         $db->conn->close();
         return $plant;
@@ -43,19 +43,19 @@ class Plant
         $result = $db->conn->query($sql);
 
         while ($row = $result->fetch_assoc()) {
-            $plants[] = new Plant($row['id'], $row['name'], $row['nomen'], $row['perennial'], $row['age'], $row['height']);
+            $plants[] = new Plant($row['id'], $row['namelt'], $row['namelat'], $row['isperennial'], $row['age'], $row['height']);
         }
         $db->conn->close();
-            return $plants;
-            print_r($plants);
+        return $plants;
+        print_r($plants);
     }
-    
+
     public static function create()
     {
         $db = new DB();
         print_r($db);
-        $stmt = $db->conn->prepare("INSERT INTO plants_registration (name, nomen, perennial, age, height) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssiid", $_POST["name"], $_POST["nomen"], $_POST["perennial"], $_POST["age"], $_POST["height"]);
+        $stmt = $db->conn->prepare("INSERT INTO plants_registration (namelt, namelat, isperennial, age, height) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssiid", $_POST["namelt"], $_POST["namelat"], $_POST["isperennial"], $_POST["age"], $_POST["height"]);
         $stmt->execute();
         $stmt->close();
         print_r($db->conn);
@@ -65,12 +65,12 @@ class Plant
     {
         $db = new DB();
         print_r($db);
-        $stmt = $db->conn->prepare("UPDATE plants_registration SET name = ?, nomen = ?, perennial = ?, age = ?, height = ? WHERE id = ?");
-        $stmt->bind_param("ssiidi", $_POST["name"], $_POST["nomen"], $_POST["perennial"], $_POST["age"], $_POST["height"], $_POST["id"]);
+        $stmt = $db->conn->prepare("UPDATE plants_registration SET namelt = ?, namelat = ?, isperennial = ?, age = ?, height = ? WHERE id = ?");
+        $stmt->bind_param("ssiidi", $_POST["namelt"], $_POST["namelat"], $_POST["isperennial"], $_POST["age"], $_POST["height"], $_POST["id"]);
         $stmt->execute();
         $stmt->close();
         $db->conn->close();
-    }   
+    }
     public static function destroy()
     {
         $db = new DB();
@@ -79,6 +79,5 @@ class Plant
         $stmt->execute();
         $stmt->close();
         $db->conn->close();
-       
-    }   
+    }
 }

@@ -58,18 +58,18 @@ $plants = PlantController::index();
             <form id="form" class="form-inline" action="" method="post">
                 <div class="form-row">
                     <div id="input1" class="form-group col-md-4">
-                        <label for="name">Lietuviškas augalo pavadinimas</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Įveskite lietuvišką pavadinimą" <?= isset($_POST['edit']) ? 'value="' . $plant->name . '"' : '' ?>>
+                        <label for="namelt">Lietuviškas augalo pavadinimas</label>
+                        <input type="text" class="form-control" id="namelt" name="namelt" placeholder="Įveskite lietuvišką pavadinimą" <?= isset($_POST['edit']) ? 'value="' . $plant->namelt . '"' : '' ?>>
                     </div>
                     <div id="input2" class="form-group col-md-4">
-                        <label for="nomen">Lotyniškas augalo pavainimas</label>
-                        <input type="text" class="form-control" id="nomen" name="nomen" placeholder="Įveskite lotynišką pavadinimą" <?= isset($_POST['edit']) ? 'value="' . $plant->nomen . '"' : '' ?>>
+                        <label for="namelat">Lotyniškas augalo pavainimas</label>
+                        <input type="text" class="form-control" id="namlat" name="namelat" placeholder="Įveskite lotynišką pavadinimą" <?= isset($_POST['edit']) ? 'value="' . $plant->namelat . '"' : '' ?>>
                     </div>
                     <div id="input3" class="form-group col-md-4">
-                        <label for="perennial">Daugiametis</label>
-                        <input type="radio" class="form-check-input" id="radio" name="perennial" value="1" checked <?= isset($_POST['edit']) ? 'value="' . $plant->perennial . '"' : '' ?>>
-                        <label for="perennial">Vienmetis</label>
-                        <input type="radio" class="form-check-input" id="radio" name="perennial" value="0" <?= isset($_POST['edit']) ? 'value="' . $plant->perennial . '"' : '' ?>>
+                        <label for="isperennial">Daugiametis</label>
+                        <input type="radio" class="form-check-input" id="radio" name="isperennial" value="1" checked <?= isset($_POST['edit']) ? 'value="' . $plant->isperennial . '"' : '' ?>>
+                        <label for="isperennial">Vienmetis</label>
+                        <input type="radio" class="form-check-input" id="radio" name="isperennial" value="0" <?= isset($_POST['edit']) ? 'value="' . $plant->isperennial . '"' : '' ?>>
                     </div>
                     <div id="input4" class="form-group col-md-4">
                         <label for="age">Maksimalus augalo amžius</label>
@@ -102,11 +102,11 @@ $plants = PlantController::index();
                 <tbody>
                     <?php foreach ($plants as $plant) { ?>
                         <tr>
-                            <td><?= $plant->name ?></td>
-                            <td><?= $plant->nomen ?></td>
-                            <td><?= $plant->perennial ? "augalas daugiametis" : "augalas vienmetis" ?></td>
-                            <td><?= $plant->age ?></td>
-                            <td><?= $plant->height ?></td>
+                            <td><?= $plant->namelt ?></td>
+                            <td><?= $plant->namelat ?></td>
+                            <td><?= $plant->isperennial ? "augalas daugiametis" : "augalas vienmetis" ?></td>
+                            <td><?= $plant->age . ' metai(-ų)' ?></td>
+                            <td><?= $plant->height . ' m' ?></td>
                             <td>
                                 <form action="" method="post">
                                     <input type="hidden" name="id" value="<?= $plant->id ?>">

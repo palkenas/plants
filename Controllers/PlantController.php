@@ -16,11 +16,11 @@ class PlantController {
     {
         session_start();
         $hasErrors = false;
-        if (empty($_POST['name'])) {
+        if (empty($_POST['namelt'])) {
             $hasErrors = true;
             $_SESSION['errors'][] = "Reikalingas lietuviškas pavadinimas";
         }
-        if (empty($_POST['nomen'])) {
+        if (empty($_POST['namelat'])) {
             $hasErrors = true;
             $_SESSION['errors'][] = "Reikalingas lotyniškas pavadinimas";
         }
@@ -33,11 +33,11 @@ class PlantController {
             $hasErrors = true;
             $_SESSION['errors'][] = "Reikalingas augalo maksimalus aukštis";
         }
-        if (strlen($_POST['name']) > 20) {
+        if (strlen($_POST['namelt']) > 20) {
             $_SESSION['errors'][] = "Lietuviškas pavadinimas negali būti ilgesnis nei 20 simbolių";
             $hasErrors = true;
         }
-        if (strlen($_POST['nomen']) > 30) {
+        if (strlen($_POST['namelat']) > 30) {
             $_SESSION['errors'][] = "Lotyniškas pavadinimas negali būti ilgesnis nei 30 simbolių";
             $hasErrors = true;
         }
@@ -68,11 +68,11 @@ class PlantController {
     {
         session_start();
         $hasErrors = false;
-        if(empty($_POST['name'])){
+        if(empty($_POST['namelt'])){
             $hasErrors = true;
             $_SESSION['errors'][] = "Reikalingas lietuviškas pavadinimas";
         }
-        if(empty($_POST['nomen'])){
+        if(empty($_POST['namelat'])){
             $hasErrors = true;
             $_SESSION['errors'][] = "Reikalingas lotyniškas pavadinimas";
         }   
@@ -85,11 +85,11 @@ class PlantController {
             $hasErrors = true;
             $_SESSION['errors'][] = "Reikalingas augalo maksimalus aukštis";
         }
-        if(strlen($_POST['name']) > 20){
+        if(strlen($_POST['namelt']) > 20){
             $_SESSION['errors'][] = "Lietuviškas pavadinimas negali būti ilgesnis nei 20 simbolių";
             $hasErrors = true;
         }
-        if(strlen($_POST['nomen']) > 30){
+        if(strlen($_POST['namelat']) > 30){
             $_SESSION['errors'][] = "Lotyniškas pavadinimas negali būti ilgesnis nei 30 simbolių";
             $hasErrors = true;
         }

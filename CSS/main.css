@@ -5,12 +5,14 @@ body {
     background-position: center !important;
     background-attachment: fixed !important;
 }
+
 .table-responsive {
     max-height: 300px;
     scroll-behavior: smooth;
     border-radius: 10px;
     margin-top: 20px;
 }
+
 #scroll::-webkit-scrollbar {
     width: 5px;
     background: transparent;
@@ -20,11 +22,13 @@ body {
     background: linear-gradient(to right, #ff38d4, #51dfe1) !important;
     border-radius: 5px;
 }
+
 #table {
     font-family: "Cyrulis", sans-serif !important;
     margin-top: 20px;
     border-radius: 10px !important;
-}   
+}
+
 #title {
     font-size: 50px;
     font-family: "Cyrulis", sans-serif !important;
@@ -38,52 +42,59 @@ body {
     margin-bottom: 20px;
     border-radius: 10px;
 }
+
 #form {
     background: linear-gradient(to right, #f6dff1, #51dfe1) !important;
     border-radius: 10px;
     width: 900px;
     margin-left: 70px;
 }
+
 #input1 {
     display: inline-block;
     width: 270px;
     margin-left: 20px;
     margin-top: 10px
 }
+
 #input2 {
     display: inline-block;
     width: 270px;
     margin-left: 20px;
-    margin-top:10px
+    margin-top: 10px
 }
+
 #input3 {
     display: inline-block;
     width: 270px;
     margin-left: 20px;
     margin-top: 40px
 }
+
 #input4 {
     display: inline-block;
     width: 270px;
     margin-left: 20px;
     margin-bottom: 20px;
-   
+
 }
+
 #input5 {
     display: inline-block;
     width: 270px;
     margin-left: 20px;
     margin-bottom: 20px;
-   
+
 }
+
 #btn {
     display: inline-block;
     margin-left: 140px;
     margin-top: 20px;
-   
+
 }
-#edit 
-{
+
+#edit {
     display: inline-block;
     margin-bottom: 10px;
 
