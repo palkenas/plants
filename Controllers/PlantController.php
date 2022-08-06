@@ -16,22 +16,27 @@ class PlantController {
     {
         session_start();
         $hasErrors = false;
-        if (empty($_POST['namelt'])) {
+        if (empty($_POST['namelt']) || empty($_POST['namelat'])) {
             $hasErrors = true;
-            $_SESSION['errors'][] = "Reikalingas lietuviškas pavadinimas";
+            $_SESSION['errors'][] = "Reikalingas pavadinimas";
         }
-        if (empty($_POST['namelat'])) {
+        if (is_numeric($_POST['namelt']) || is_numeric($_POST['namelat'])) {
             $hasErrors = true;
-            $_SESSION['errors'][] = "Reikalingas lotyniškas pavadinimas";
+            $_SESSION['errors'][] = "Pavadinimas negali būti skaičius";
         }
 
-        if (empty($_POST['age'])) {
+        if (preg_match('/[^a-zA-ZĄČĘĖĮŠŲŪŽąčęėįšųūž_\-]/i', $_POST['namelt']) || preg_match('/[^a-zA-Z _\-]/i', $_POST['namelat'])) {
             $hasErrors = true;
-            $_SESSION['errors'][] = "Reikalingas augalo maksimalus amžius";
+            $_SESSION['errors'][] = "Pavadinime turi būti tik raidės";
         }
-        if (empty($_POST['height'])) {
+
+        if (is_numeric($_POST['age']) == false) {
             $hasErrors = true;
-            $_SESSION['errors'][] = "Reikalingas augalo maksimalus aukštis";
+            $_SESSION['errors'][] = "Augalo amžius turi būti skaičius";
+        }
+        if (is_numeric($_POST['height']) == false) {
+            $hasErrors = true;
+            $_SESSION['errors'][] = "Augalo aukštis turi būti skaičius";
         }
         if (strlen($_POST['namelt']) > 20) {
             $_SESSION['errors'][] = "Lietuviškas pavadinimas negali būti ilgesnis nei 20 simbolių";
@@ -55,8 +60,8 @@ class PlantController {
             Plant::update();
             return false;
         }
-        
     }
+    
 
     public static function destroy()
     {
@@ -68,22 +73,27 @@ class PlantController {
     {
         session_start();
         $hasErrors = false;
-        if(empty($_POST['namelt'])){
+        if(empty($_POST['namelt'])||empty($_POST['namelat'])){
             $hasErrors = true;
-            $_SESSION['errors'][] = "Reikalingas lietuviškas pavadinimas";
+            $_SESSION['errors'][] = "Reikalingas pavadinimas";
         }
-        if(empty($_POST['namelat'])){
+        if(is_numeric($_POST['namelt']) || is_numeric($_POST['namelat'])){
             $hasErrors = true;
-            $_SESSION['errors'][] = "Reikalingas lotyniškas pavadinimas";
-        }   
+            $_SESSION['errors'][] = "Pavadinimas negali būti skaičius";
+        }
+
+        if(preg_match('/[^a-zA-ZĄČĘĖĮŠŲŪŽąčęėįšųūž_\-]/i', $_POST['namelt']) || preg_match('/[^a-zA-Z _\-]/i', $_POST['namelat'])){
+            $hasErrors = true;
+            $_SESSION['errors'][] = "Pavadinime turi būti tik raidės";
+        }
         
-        if(empty($_POST['age'])){
+        if(is_numeric($_POST['age']) == false){
             $hasErrors = true;
-            $_SESSION['errors'][] = "Reikalingas augalo maksimalus amžius";
+            $_SESSION['errors'][] = "Augalo amžius turi būti skaičius";
         }
-        if(empty($_POST['height'])){
+        if(is_numeric($_POST['height']) == false){
             $hasErrors = true;
-            $_SESSION['errors'][] = "Reikalingas augalo maksimalus aukštis";
+            $_SESSION['errors'][] = "Augalo aukštis turi būti skaičius";
         }
         if(strlen($_POST['namelt']) > 20){
             $_SESSION['errors'][] = "Lietuviškas pavadinimas negali būti ilgesnis nei 20 simbolių";

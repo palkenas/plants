@@ -7,7 +7,7 @@ body {
 }
 
 .table-responsive {
-    max-height: 300px;
+    max-height: 250px;
     scroll-behavior: smooth;
     border-radius: 10px;
     margin-top: 20px;
@@ -47,7 +47,7 @@ body {
     background: linear-gradient(to right, #f6dff1, #51dfe1) !important;
     border-radius: 10px;
     width: 900px;
-    margin-left: 70px;
+    margin-left: 10px;
 }
 
 #input1 {
@@ -97,5 +97,20 @@ body {
 #edit {
     display: inline-block;
     margin-bottom: 10px;
+
+}
+#alert {
+    display: inline;
+    margin-top: 50px;
+    width: 250px;
+    height: 20px;
+    font-size: 15px;
+    margin-left: 110px;
+    background-color: #ff38d4;
+    color: white;
+
+}
+#alert2 {
+margin-top: 20px;
 
 }

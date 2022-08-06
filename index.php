@@ -12,8 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $plant = PlantController::show();
     }
     if (isset($_POST['update'])) {
-        PlantController::update();
-        header("Location:" . $_SERVER['REQUEST_URI']);
+        if (isset($_POST['update'])) {
+            $hasErrors = PlantController::update();
+            if (!$hasErrors) {
+                header("Location:" . $_SERVER['REQUEST_URI']);
+            }
+        }
     }
     if (isset($_POST['destroy'])) {
         PlantController::destroy();
@@ -42,15 +46,6 @@ $plants = PlantController::index();
 <body>
 
     <div class="container">
-        <?php if (isset($_SESSION) && isset($_SESSION['errors'])) {
-            foreach ($_SESSION['errors'] as $error) { ?>
-                <div class="alert alert-danger" role="allert">
-                    <?= $error; ?>
-                </div>
-        <?php  }
-            unset($_SESSION['errors']);
-        }
-        ?>
         <div id="title">
             Augalų enciklopedija
         </div>
@@ -58,12 +53,12 @@ $plants = PlantController::index();
             <form id="form" class="form-inline" action="" method="post">
                 <div class="form-row">
                     <div id="input1" class="form-group col-md-4">
-                        <label for="namelt">Lietuviškas augalo pavadinimas</label>
-                        <input type="text" class="form-control" id="namelt" name="namelt" placeholder="Įveskite lietuvišką pavadinimą" <?= isset($_POST['edit']) ? 'value="' . $plant->namelt . '"' : '' ?>>
+                        <label for="namelt">Augalo pavadinimas</label>
+                        <input type="text" class="form-control" id="namelt" name="namelt" placeholder="Lietuviškas" <?= isset($_POST['edit']) ? 'value="' . $plant->namelt . '"' : '' ?>>
                     </div>
                     <div id="input2" class="form-group col-md-4">
-                        <label for="namelat">Lotyniškas augalo pavainimas</label>
-                        <input type="text" class="form-control" id="namlat" name="namelat" placeholder="Įveskite lotynišką pavadinimą" <?= isset($_POST['edit']) ? 'value="' . $plant->namelat . '"' : '' ?>>
+                        <label for="namelat">Augalo pavadinimas</label>
+                        <input type="text" class="form-control" id="namlat" name="namelat" placeholder="Lotyniškas" <?= isset($_POST['edit']) ? 'value="' . $plant->namelat . '"' : '' ?>>
                     </div>
                     <div id="input3" class="form-group col-md-4">
                         <label for="isperennial">Daugiametis</label>
@@ -72,31 +67,43 @@ $plants = PlantController::index();
                         <input type="radio" class="form-check-input" id="radio" name="isperennial" value="0" <?= isset($_POST['edit']) ? 'value="' . $plant->isperennial . '"' : '' ?>>
                     </div>
                     <div id="input4" class="form-group col-md-4">
-                        <label for="age">Maksimalus augalo amžius</label>
-                        <input type="text" class="form-control" id="age" name="age" placeholder="Įveskite maksimalų augalo amžių" <?= isset($_POST['edit']) ? 'value="' . $plant->age . '"' : '' ?>>
+                        <label for="age">Augalo amžius</label>
+                        <input type="text" class="form-control" id="age" name="age" placeholder="Maksimalus" <?= isset($_POST['edit']) ? 'value="' . $plant->age . '"' : '' ?>>
                     </div>
                     <div id="input5" class="form-group col-md-4">
-                        <label for="height">Maksimalus augalo aukštis</label>
-                        <input type="text" class="form-control" id="height" name="height" placeholder="Įveskite maksimalų augalo aukštį" <?= isset($_POST['edit']) ? 'value="' . $plant->height . '"' : '' ?>>
+                        <label for="height">Augalo aukštis</label>
+                        <input type="text" class="form-control" id="height" name="height" placeholder="Maksimalus" <?= isset($_POST['edit']) ? 'value="' . $plant->height . '"' : '' ?>>
                     </div>
                     <?= isset($_POST['edit']) ? '<input type="hidden" name="id" value="' . $plant->id . '">' : "" ?>
                     <button id="btn" class="btn btn-outline-dark" type="submit" name=<?= isset($_POST['edit']) ? '"update" > Atnaujinti' : '"save" > Išsaugoti' ?> </button>
+                </div>
             </form>
         </div>
     </div>
-
+    <div id="alert2">
+        <?php if (isset($_SESSION) && isset($_SESSION['errors'])) {
+            foreach ($_SESSION['errors'] as $error) { ?>
+                <div id="alert" class="alert alert-danger" role="allert">
+                    <?= $error; ?>
+                </div>
+        <?php  }
+            unset($_SESSION['errors']);
+        }
+        ?>
+    </div>
 
     <div class="container">
         <div id="scroll" class="table-responsive">
-            <table id="table" class="table table-striped table-light">
+            <table id="table" class="table table-striped table-dark">
                 <thead>
                     <tr>
-                        <th scope="col">Lietuviškas augalo pavadinimas</th>
-                        <th scope="col">Lotyniškas augalo pavadinimas</th>
+                        <th scope="col">Lietuviškas pavadinimas</th>
+                        <th scope="col">Lotyniškas pavadinimas</th>
                         <th scope="col">Daugiametis/Vienmetis</th>
-                        <th scope="col">Maksimalus augalo amžius</th>
-                        <th scope="col">Maksimalus augalo aukštis</th>
-                        <th scope="col">Veiksmai</th>
+                        <th scope="col">Maksimalus amžius</th>
+                        <th scope="col">Maksimalus aukštis</th>
+                        <th scope="col">Redaguoti</th>
+                        <th scope="col">Ištrinti</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -112,6 +119,8 @@ $plants = PlantController::index();
                                     <input type="hidden" name="id" value="<?= $plant->id ?>">
                                     <button id="edit" class="btn btn-outline-warning" type="submit" name="edit">Redaguoti</button>
                                 </form>
+                            </td>
+                            <td>
                                 <form action="" method="post">
                                     <input type="hidden" name="id" value="<?= $plant->id ?>">
                                     <button id="delete" class="btn btn-outline-danger" type="submit" name="destroy">Ištrinti</button>
